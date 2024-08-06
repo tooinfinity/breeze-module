@@ -12,7 +12,7 @@ trait InstallsModuleBladeStack
      *
      * @return int|null
      */
-    protected function installModuleBladeStack(): ?int
+    protected function installModuleBladeStack()
     {
         // NPM Packages...
         $this->updateNodePackages(function ($packages) {

@@ -11,7 +11,7 @@ trait InstallsModuleApiStack
      *
      * @return int|null
      */
-    protected function installModuleApiStack(): ?int
+    protected function installModuleApiStack()
     {
         $this->runCommands(['php artisan install:module-api']);
 
