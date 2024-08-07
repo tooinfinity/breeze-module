@@ -59,6 +59,18 @@ trait InstallsModuleBladeStack
         copy(__DIR__.'/../../stubs/module-blade/routes/web.php', base_path('Modules/Auth/routes/web.php'));
         copy(__DIR__.'/../../stubs/module-blade/routes/auth.php', base_path('Modules/Auth/routes/auth.php'));
 
+        // Migrations
+        copy(__DIR__.'/../../stubs/module-api/database/migrations/0001_01_01_000000_create_users_table.php', base_path('Modules/Auth/database/migrations/0001_01_01_000000_create_users_table.php'));
+
+        // Factories
+        copy(__DIR__.'/../../stubs/module-api/database/factories/UserFactory.php', base_path('Modules/Auth/database/factories/UserFactory.php'));
+
+        // seeders
+        copy(__DIR__.'/../../stubs/module-api/database/seeders/DatabaseSeeder.php', base_path('Modules/Auth/database/seeders/DatabaseSeeder.php'));
+
+        // Models
+        copy(__DIR__.'/../../stubs/module-api/app/Models/User.php', base_path('Modules/Auth/app/Models/User.php'));
+
         // "Dashboard" Route...
         $this->replaceInFile('/home', '/dashboard', base_path('Modules/Auth/resources/views/welcome.blade.php'));
         $this->replaceInFile('Home', 'Dashboard', base_path('Modules/Auth/resources/views/welcome.blade.php'));

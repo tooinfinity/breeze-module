@@ -49,6 +49,18 @@ trait InstallsModuleApiStack
         // Configuration...
         $files->copyDirectory(__DIR__.'/../../stubs/module-api/config', base_path('Modules/Auth/config'));
 
+        // Migrations
+        copy(__DIR__.'/../../stubs/module-api/database/migrations/0001_01_01_000000_create_users_table.php', base_path('Modules/Auth/database/migrations/0001_01_01_000000_create_users_table.php'));
+
+        // Factories
+        copy(__DIR__.'/../../stubs/module-api/database/factories/UserFactory.php', base_path('Modules/Auth/database/factories/UserFactory.php'));
+
+        // seeders
+        copy(__DIR__.'/../../stubs/module-api/database/seeders/DatabaseSeeder.php', base_path('Modules/Auth/database/seeders/DatabaseSeeder.php'));
+
+        // Models
+        copy(__DIR__.'/../../stubs/module-api/app/Models/User.php', base_path('Modules/Auth/app/Models/User.php'));
+
         // Environment...
         if (! $files->exists(base_path('.env'))) {
             copy(base_path('.env.example'), base_path('.env'));
