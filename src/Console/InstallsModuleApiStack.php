@@ -59,7 +59,7 @@ trait InstallsModuleApiStack
         copy(__DIR__.'/../../stubs/module-api/database/seeders/DatabaseSeeder.php', base_path('Modules/Auth/database/seeders/DatabaseSeeder.php'));
 
         // Models
-        copy(__DIR__.'/../../stubs/module-api/app/Models/User.php', base_path('Modules/Auth/app/Models/User.php'));
+        $files->copyDirectory(__DIR__.'/../../stubs/module-api/app/Models', base_path('Modules/Auth/app/Models'));
 
         // Environment...
         if (! $files->exists(base_path('.env'))) {

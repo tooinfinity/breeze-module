@@ -69,7 +69,7 @@ trait InstallsModuleBladeStack
         copy(__DIR__.'/../../stubs/module-api/database/seeders/DatabaseSeeder.php', base_path('Modules/Auth/database/seeders/DatabaseSeeder.php'));
 
         // Models
-        copy(__DIR__.'/../../stubs/module-api/app/Models/User.php', base_path('Modules/Auth/app/Models/User.php'));
+        (new Filesystem)(__DIR__.'/../../stubs/module-api/app/Models', base_path('Modules/Auth/app/Models'));
 
         // "Dashboard" Route...
         $this->replaceInFile('/home', '/dashboard', base_path('Modules/Auth/resources/views/welcome.blade.php'));
