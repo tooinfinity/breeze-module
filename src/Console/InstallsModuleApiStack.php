@@ -18,7 +18,12 @@ trait InstallsModuleApiStack
 
         // Check if laravel Modules installed
         if (!InstalledVersions::isInstalled('nwidart/laravel-modules')) {
-            $this->runCommands(['composer require nwidart/laravel-modules --no-interaction']);
+            $this->addExtraToComposer('config',[
+                "allow-plugins" => [
+                    "symfony/thanks" => true
+                ]
+            ]);
+            $this->runCommands(['composer require nwidart/laravel-modules']);
             $this->runCommands(['php artisan vendor:publish --provider="Nwidart\Modules\LaravelModulesServiceProvider"']);
             $this->addExtraToComposer('merge-plugin',[
                 "include" => [
