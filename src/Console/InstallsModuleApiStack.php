@@ -3,7 +3,6 @@
 namespace Laravel\Breeze\Console;
 
 use Illuminate\Filesystem\Filesystem;
-use Composer\InstalledVersions;
 
 trait InstallsModuleApiStack
 {
@@ -15,26 +14,7 @@ trait InstallsModuleApiStack
     protected function installModuleApiStack()
     {
         $this->runCommands(['php artisan install:api']);
-
-        // Check if laravel Modules installed
-        if (!InstalledVersions::isInstalled('nwidart/laravel-modules')) {
-            $this->addExtraToComposer('config',[
-                "allow-plugins" => [
-                    "symfony/thanks" => true
-                ]
-            ]);
-            $this->runCommands(['composer require nwidart/laravel-modules']);
-            $this->runCommands(['php artisan vendor:publish --provider="Nwidart\Modules\LaravelModulesServiceProvider"']);
-            $this->addExtraToComposer('merge-plugin',[
-                "include" => [
-                "Modules/*/composer.json"
-            ]
-            ]);
-            $this->runCommands(['composer dump-autoload']);
-
-        }
-        $this->runCommands(['php artisan module:make Auth']);
-
+        $this->installModuleDependencies();
 
         $files = new Filesystem;
 

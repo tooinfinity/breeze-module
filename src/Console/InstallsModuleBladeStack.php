@@ -14,6 +14,7 @@ trait InstallsModuleBladeStack
      */
     protected function installModuleBladeStack()
     {
+        $this->installModuleDependencies();
         // NPM Packages...
         $this->updateNodePackages(function ($packages) {
             return [
