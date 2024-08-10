@@ -424,7 +424,7 @@ class InstallCommand extends Command implements PromptsForMissingInput
         if (!InstalledVersions::isInstalled('nwidart/laravel-modules')) {
             $this->addExtraToComposer('config',[
                 "allow-plugins" => [
-                    "symfony/thanks" => true
+                    "wikimedia/composer-merge-plugin" => true
                 ]
             ]);
             $this->runCommands(['composer require nwidart/laravel-modules']);
