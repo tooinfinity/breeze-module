@@ -48,7 +48,7 @@ trait InstallsModuleApiStack
         copy(__DIR__.'/../../stubs/module-api/routes/auth.php', base_path('Modules/Auth/routes/auth.php'));
 
         // Configuration...
-        $files->copyDirectory(__DIR__.'/../../stubs/module-api/config', base_path('Modules/Auth/config'));
+        $files->copyDirectory(__DIR__.'/../../stubs/module-api/config', config_path());
 
         // Migrations
         copy(__DIR__.'/../../stubs/module-api/database/migrations/0001_01_01_000000_create_users_table.php', base_path('Modules/Auth/database/migrations/0001_01_01_000000_create_users_table.php'));
