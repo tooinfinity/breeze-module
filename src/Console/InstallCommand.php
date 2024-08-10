@@ -14,6 +14,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Process\PhpExecutableFinder;
 use Symfony\Component\Process\Process;
+use Illuminate\Support\Facades\File;
 
 use function Laravel\Prompts\confirm;
 use function Laravel\Prompts\multiselect;
@@ -412,4 +413,29 @@ class InstallCommand extends Command implements PromptsForMissingInput
     {
         return class_exists(\Pest\TestSuite::class);
     }
+
+    /**
+     * Adding code to composer Extra
+     * @param $key
+     * @param $value
+     * @return void
+     */
+    function addExtraToComposer($key, $value) {
+        $composerJsonPath = base_path('composer.json');
+
+        // Read and decode composer.json
+        $composerJson = json_decode(File::get($composerJsonPath), true);
+
+        // Ensure the 'extra' section exists
+        if (!isset($composerJson['extra'])) {
+            $composerJson['extra'] = [];
+        }
+
+        // Add or update the key-value pair
+        $composerJson['extra'][$key] = $value;
+
+        // Encode the array back to JSON and save it
+        File::put($composerJsonPath, json_encode($composerJson, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
+    }
+
 }
