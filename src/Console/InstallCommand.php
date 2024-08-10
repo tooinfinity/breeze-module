@@ -422,14 +422,13 @@ class InstallCommand extends Command implements PromptsForMissingInput
     {
         // Check if laravel Modules installed and install it
         if (!InstalledVersions::isInstalled('nwidart/laravel-modules')) {
-            $this->addExtraToComposer('config',[
-                "allow-plugins" => [
-                    "wikimedia/composer-merge-plugin" => true
-                ]
+            $this->addToComposer('config','allow-plugins',[
+                "wikimedia/composer-merge-plugin" => true
             ]);
+            $this->runCommands(['composer dump-autoload']);
             $this->runCommands(['composer require nwidart/laravel-modules']);
             $this->runCommands(['php artisan vendor:publish --provider="Nwidart\Modules\LaravelModulesServiceProvider"']);
-            $this->addExtraToComposer('merge-plugin',[
+            $this->addToComposer( 'extra','merge-plugin',[
                 "include" => [
                     "Modules/*/composer.json"
                 ]
@@ -444,21 +443,22 @@ class InstallCommand extends Command implements PromptsForMissingInput
      * Adding code to composer Extra
      * @param $key
      * @param $value
+     * @param $parent
      * @return void
      */
-    function addExtraToComposer($key, $value) {
+    function addToComposer($parent, $key, $value) {
         $composerJsonPath = base_path('composer.json');
 
         // Read and decode composer.json
         $composerJson = json_decode(File::get($composerJsonPath), true);
 
         // Ensure the 'extra' section exists
-        if (!isset($composerJson['extra'])) {
-            $composerJson['extra'] = [];
+        if (!isset($composerJson[$parent])) {
+            $composerJson[$parent] = [];
         }
 
         // Add or update the key-value pair
-        $composerJson['extra'][$key] = $value;
+        $composerJson[$parent][$key] = $value;
 
         // Encode the array back to JSON and save it
         File::put($composerJsonPath, json_encode($composerJson, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
