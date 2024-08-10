@@ -13,7 +13,7 @@ trait InstallsModuleApiStack
      */
     protected function installModuleApiStack()
     {
-        //$this->runCommands(['php artisan install:module-api']);
+        $this->runCommands(['php artisan install:api']);
 
         $files = new Filesystem;
 
