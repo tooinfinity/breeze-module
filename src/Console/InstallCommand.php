@@ -63,7 +63,7 @@ class InstallCommand extends Command implements PromptsForMissingInput
         } elseif ($this->argument('stack') === 'blade') {
             return $this->installBladeStack();
         } elseif ($this->argument('stack') === 'module-blade') {
-            return $this->installBladeStack();
+            return $this->installModuleBladeStack();
         } elseif ($this->argument('stack') === 'livewire') {
             return $this->installLivewireStack();
         } elseif ($this->argument('stack') === 'livewire-functional') {
