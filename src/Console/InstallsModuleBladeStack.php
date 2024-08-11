@@ -72,6 +72,10 @@ trait InstallsModuleBladeStack
         // Models
         (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/module-api/app/Models', base_path('Modules/Auth/app/Models'));
 
+        // Cleaning
+        (new Filesystem)->delete(base_path('Modules/Auth/resources/views/index.blade.php'));
+        (new Filesystem)->move(resource_path('views/welcome.blade.php'),base_path('Modules/Auth/resources/views/welcome.blade.php'));
+
         // "Dashboard" Route...
         $this->replaceInFile('/home', '/dashboard', base_path('Modules/Auth/resources/views/welcome.blade.php'));
         $this->replaceInFile('Home', 'Dashboard', base_path('Modules/Auth/resources/views/welcome.blade.php'));
