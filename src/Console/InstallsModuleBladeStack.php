@@ -85,14 +85,15 @@ trait InstallsModuleBladeStack
         (new Filesystem)->delete(resource_path('css/app.css'));
         (new Filesystem)->delete(resource_path('js/app.js'));
         (new Filesystem)->delete(resource_path('js/bootstrap.js'));
-
+        (new Filesystem)->delete(base_path('Modules/Auth/resources/assets/js/app.js'));
+        (new Filesystem)->deleteDirectory(base_path('Modules/Auth/resources/assets/sass'));
 
         // Tailwind / Vite...
         copy(__DIR__.'/../../stubs/module-blade/tailwind.config.js', base_path('Modules/Auth/tailwind.config.js'));
         copy(__DIR__.'/../../stubs/module-blade/postcss.config.js', base_path('Modules/Auth/postcss.config.js'));
         copy(__DIR__.'/../../stubs/module-blade/vite.config.js', base_path('Modules/Auth/vite.config.js'));
-        copy(__DIR__.'/../../stubs/module-blade/resources/css/app.css', base_path('Modules/Auth/resources/assets/css/app.css'));
-        copy(__DIR__.'/../../stubs/module-blade/resources/js/app.js', base_path('Modules/Auth/resources/assets/js/app.js'));
+        (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/module-blade/resources/css', base_path('Modules/Auth/resources/assets/css'));
+        (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/module-blade/resources/js', base_path('Modules/Auth/resources/assets/js'));
 
         $this->components->info('Installing and building Node dependencies.');
 
