@@ -117,5 +117,11 @@ trait InstallsModuleApiStack
         // Remove CSS and JavaScript directories...
         $files->deleteDirectory(base_path('Modules/Auth/resources/assets/sass'));
         $files->deleteDirectory(base_path('Modules/Auth/resources/assets/js'));
+
+        // remove unnecessary files
+        $files->delete(base_path('vite.config.js'));
+        $files->delete(resource_path('css/app.css'));
+        $files->delete(resource_path('js/app.js'));
+        $files->delete(resource_path('js/bootstrap.js'));
     }
 }

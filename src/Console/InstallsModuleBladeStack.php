@@ -80,6 +80,13 @@ trait InstallsModuleBladeStack
         $this->replaceInFile('/home', '/dashboard', base_path('Modules/Auth/resources/views/welcome.blade.php'));
         $this->replaceInFile('Home', 'Dashboard', base_path('Modules/Auth/resources/views/welcome.blade.php'));
 
+        // remove unnecessary files
+        (new Filesystem)->delete(base_path('vite.config.js'));
+        (new Filesystem)->delete(resource_path('css/app.css'));
+        (new Filesystem)->delete(resource_path('js/app.js'));
+        (new Filesystem)->delete(resource_path('js/bootstrap.js'));
+
+
         // Tailwind / Vite...
         copy(__DIR__.'/../../stubs/module-blade/tailwind.config.js', base_path('Modules/Auth/tailwind.config.js'));
         copy(__DIR__.'/../../stubs/module-blade/postcss.config.js', base_path('Modules/Auth/postcss.config.js'));
@@ -118,5 +125,6 @@ trait InstallsModuleBladeStack
 
         // Remove users seeders
         $files->delete(base_path('database/seeders/DatabaseSeeder.php'));
+
     }
 }
