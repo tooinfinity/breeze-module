@@ -92,8 +92,8 @@ trait InstallsModuleBladeStack
         copy(__DIR__.'/../../stubs/module-blade/tailwind.config.js', base_path('tailwind.config.js'));
         copy(__DIR__.'/../../stubs/module-blade/postcss.config.js', base_path('postcss.config.js'));
         copy(__DIR__.'/../../stubs/module-blade/vite.config.js', base_path('vite.config.js'));
-        copy(__DIR__.'/../../stubs/module-blade/resources/css', resource_path('css/app.css'));
-        copy(__DIR__.'/../../stubs/module-blade/resources/js', resource_path('js/app.js'));
+        copy(__DIR__.'/../../stubs/module-blade/resources/css/app.css', resource_path('css/app.css'));
+        copy(__DIR__.'/../../stubs/module-blade/resources/js/app.js', resource_path('js/app.js'));
 
         $this->components->info('Installing and building Node dependencies.');
 
