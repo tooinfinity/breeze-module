@@ -74,26 +74,26 @@ trait InstallsModuleBladeStack
 
         // Cleaning
         (new Filesystem)->delete(base_path('Modules/Auth/resources/views/index.blade.php'));
-        (new Filesystem)->move(resource_path('views/welcome.blade.php'),base_path('Modules/Auth/resources/views/welcome.blade.php'));
+        //(new Filesystem)->move(resource_path('views/welcome.blade.php'),base_path('Modules/Auth/resources/views/welcome.blade.php'));
 
         // "Dashboard" Route...
-        $this->replaceInFile('/home', '/dashboard', base_path('Modules/Auth/resources/views/welcome.blade.php'));
-        $this->replaceInFile('Home', 'Dashboard', base_path('Modules/Auth/resources/views/welcome.blade.php'));
+        $this->replaceInFile('/home', '/dashboard', resource_path('views/welcome.blade.php'));
+        $this->replaceInFile('Home', 'Dashboard', resource_path('views/welcome.blade.php'));
 
         // remove unnecessary files
-        (new Filesystem)->delete(base_path('vite.config.js'));
+        /*(new Filesystem)->delete(base_path('vite.config.js'));
         (new Filesystem)->delete(resource_path('css/app.css'));
         (new Filesystem)->delete(resource_path('js/app.js'));
-        (new Filesystem)->delete(resource_path('js/bootstrap.js'));
+        (new Filesystem)->delete(resource_path('js/bootstrap.js'));*/
         (new Filesystem)->delete(base_path('Modules/Auth/resources/assets/js/app.js'));
         (new Filesystem)->deleteDirectory(base_path('Modules/Auth/resources/assets/sass'));
 
         // Tailwind / Vite...
-        copy(__DIR__.'/../../stubs/module-blade/tailwind.config.js', base_path('Modules/Auth/tailwind.config.js'));
-        copy(__DIR__.'/../../stubs/module-blade/postcss.config.js', base_path('Modules/Auth/postcss.config.js'));
-        copy(__DIR__.'/../../stubs/module-blade/vite.config.js', base_path('Modules/Auth/vite.config.js'));
-        (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/module-blade/resources/css', base_path('Modules/Auth/resources/assets/css'));
-        (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/module-blade/resources/js', base_path('Modules/Auth/resources/assets/js'));
+        copy(__DIR__.'/../../stubs/module-blade/tailwind.config.js', base_path('tailwind.config.js'));
+        copy(__DIR__.'/../../stubs/module-blade/postcss.config.js', base_path('postcss.config.js'));
+        copy(__DIR__.'/../../stubs/module-blade/vite.config.js', base_path('vite.config.js'));
+        copy(__DIR__.'/../../stubs/module-blade/resources/css', resource_path('css/app.css'));
+        copy(__DIR__.'/../../stubs/module-blade/resources/js', resource_path('js/app.js'));
 
         $this->components->info('Installing and building Node dependencies.');
 
