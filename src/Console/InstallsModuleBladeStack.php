@@ -81,12 +81,12 @@ trait InstallsModuleBladeStack
         $this->replaceInFile('Home', 'Dashboard', resource_path('views/welcome.blade.php'));
 
         // remove unnecessary files
-        /*(new Filesystem)->delete(base_path('vite.config.js'));
+        (new Filesystem)->delete(base_path('vite.config.js'));
         (new Filesystem)->delete(resource_path('css/app.css'));
         (new Filesystem)->delete(resource_path('js/app.js'));
-        (new Filesystem)->delete(resource_path('js/bootstrap.js'));*/
-        /*(new Filesystem)->delete(base_path('Modules/Auth/resources/assets/js/app.js'));
-        (new Filesystem)->deleteDirectory(base_path('Modules/Auth/resources/assets/sass'));*/
+        // (new Filesystem)->delete(resource_path('js/bootstrap.js'));
+        // (new Filesystem)->delete(base_path('Modules/Auth/resources/assets/js/app.js'));
+        // (new Filesystem)->deleteDirectory(base_path('Modules/Auth/resources/assets/sass'));
 
         // Tailwind / Vite...
         copy(__DIR__.'/../../stubs/module-blade/tailwind.config.js', base_path('tailwind.config.js'));
