@@ -127,10 +127,9 @@ trait InstallsModuleBladeStack
         $files->delete(base_path('database/seeders/DatabaseSeeder.php'));
 
     }
-
     protected function updateAuthModelConfig(): void
     {
         // Update the 'model' value for the 'users' provider dynamically
-        Config::set('auth.providers.users.model', env('AUTH_MODEL', App\Models\User::class));
+        Config::set('auth.providers.users.model', env('AUTH_MODEL', Modules\Auth\Models\User::class));
     }
 }
