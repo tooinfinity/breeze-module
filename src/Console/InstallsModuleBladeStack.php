@@ -27,7 +27,7 @@ trait InstallsModuleBladeStack
             ] + $packages;
         });
 
-        $this->updateAuthModelConfig(\Modules\Auth\Models\User::class);
+        $this->updateAuthModelConfig(env('AUTH_MODEL', App\Models\User::class));
 
         // Cleaning...
         $this->removeScaffoldingUnnecessaryForModuleBlade();
