@@ -3,6 +3,7 @@
 namespace Laravel\Breeze\Console;
 
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Facades\Config;
 use Symfony\Component\Finder\Finder;
 
 trait InstallsModuleBladeStack
@@ -25,6 +26,11 @@ trait InstallsModuleBladeStack
                 'tailwindcss' => '^3.1.0',
             ] + $packages;
         });
+
+        $this->updateAuthModelConfig(\Modules\Auth\Models\User::class);
+
+        // Cleaning...
+        $this->removeScaffoldingUnnecessaryForModuleBlade();
 
         // Controllers...
         (new Filesystem)->ensureDirectoryExists(base_path('Modules/Auth/app/Http/Controllers'));
@@ -74,7 +80,6 @@ trait InstallsModuleBladeStack
 
         // Cleaning
         (new Filesystem)->delete(base_path('Modules/Auth/resources/views/index.blade.php'));
-        //(new Filesystem)->move(resource_path('views/welcome.blade.php'),base_path('Modules/Auth/resources/views/welcome.blade.php'));
 
         // "Dashboard" Route...
         $this->replaceInFile('/home', '/dashboard', resource_path('views/welcome.blade.php'));
@@ -84,9 +89,6 @@ trait InstallsModuleBladeStack
         (new Filesystem)->delete(base_path('vite.config.js'));
         (new Filesystem)->delete(resource_path('css/app.css'));
         (new Filesystem)->delete(resource_path('js/app.js'));
-        // (new Filesystem)->delete(resource_path('js/bootstrap.js'));
-        // (new Filesystem)->delete(base_path('Modules/Auth/resources/assets/js/app.js'));
-        // (new Filesystem)->deleteDirectory(base_path('Modules/Auth/resources/assets/sass'));
 
         // Tailwind / Vite...
         copy(__DIR__.'/../../stubs/module-blade/tailwind.config.js', base_path('tailwind.config.js'));
@@ -104,9 +106,6 @@ trait InstallsModuleBladeStack
         } else {
             $this->runCommands(['npm install', 'npm run build']);
         }
-
-        // Cleaning...
-        $this->removeScaffoldingUnnecessaryForModuleBlade();
 
         $this->line('');
         $this->components->info('Auth Module scaffolding installed successfully.');
@@ -127,5 +126,11 @@ trait InstallsModuleBladeStack
         // Remove users seeders
         $files->delete(base_path('database/seeders/DatabaseSeeder.php'));
 
+    }
+
+    protected function updateAuthModelConfig($newModelClass): void
+    {
+        // Update the 'model' value for the 'users' provider dynamically
+        Config::set('auth.providers.users.model', $newModelClass);
     }
 }
