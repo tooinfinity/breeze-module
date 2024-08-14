@@ -3,7 +3,7 @@
 namespace Modules\Auth\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Modules\Auth\App\Http\Requests\Auth\LoginRequest;
+use Modules\Auth\Http\Requests\Auth\LoginRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,7 +16,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function create(): View
     {
-        return view('auth.login');
+        return view("auth::auth.login");
     }
 
     /**
