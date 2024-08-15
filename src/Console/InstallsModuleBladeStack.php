@@ -94,8 +94,6 @@ trait InstallsModuleBladeStack
         copy(__DIR__.'/../../stubs/module-blade/resources/css/app.css', resource_path('css/app.css'));
         copy(__DIR__.'/../../stubs/module-blade/resources/js/app.js', resource_path('js/app.js'));
 
-        $this->runCommands(['composer dump-autoload']);
-
         $this->components->info('Installing and building Node dependencies.');
 
         if (file_exists(base_path('pnpm-lock.yaml'))) {

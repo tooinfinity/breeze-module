@@ -425,7 +425,6 @@ class InstallCommand extends Command implements PromptsForMissingInput
             $this->addToComposer('config','allow-plugins',[
                 "wikimedia/composer-merge-plugin" => true
             ]);
-            $this->runCommands(['composer dump-autoload']);
             $this->runCommands(['composer require nwidart/laravel-modules']);
             $this->runCommands(['php artisan vendor:publish --provider="Nwidart\Modules\LaravelModulesServiceProvider"']);
             $this->addToComposer( 'extra','merge-plugin',[
