@@ -47,6 +47,10 @@ trait InstallsModuleApiStack
         copy(__DIR__.'/../../stubs/module-api/routes/web.php', base_path('Modules/Auth/routes/web.php'));
         copy(__DIR__.'/../../stubs/module-api/routes/auth.php', base_path('Modules/Auth/routes/auth.php'));
 
+        // Remove Auth Config and add new one
+        $files->delete(config_path('auth.php'));
+        copy(__DIR__.'/../../stubs/module-api/config/auth.php', base_path('config/auth.php'));
+
         // Configuration...
         $files->copyDirectory(__DIR__.'/../../stubs/module-api/config', config_path());
 
