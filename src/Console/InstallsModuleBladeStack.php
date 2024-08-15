@@ -66,19 +66,19 @@ trait InstallsModuleBladeStack
         copy(__DIR__.'/../../stubs/module-blade/routes/auth.php', base_path('Modules/Auth/routes/auth.php'));
 
         // Migrations
-        copy(__DIR__.'/../../stubs/module-api/database/migrations/0001_01_01_000000_create_users_table.php', base_path('Modules/Auth/database/migrations/0001_01_01_000000_create_users_table.php'));
+        copy(__DIR__.'/../../stubs/module-blade/database/migrations/0001_01_01_000000_create_users_table.php', base_path('Modules/Auth/database/migrations/0001_01_01_000000_create_users_table.php'));
 
         // Factories
-        copy(__DIR__.'/../../stubs/module-api/database/factories/UserFactory.php', base_path('Modules/Auth/database/factories/UserFactory.php'));
+        copy(__DIR__.'/../../stubs/module-blade/database/factories/UserFactory.php', base_path('Modules/Auth/database/factories/UserFactory.php'));
 
         // seeders
-        copy(__DIR__.'/../../stubs/module-api/database/seeders/DatabaseSeeder.php', base_path('Modules/Auth/database/seeders/DatabaseSeeder.php'));
+        copy(__DIR__.'/../../stubs/module-blade/database/seeders/DatabaseSeeder.php', base_path('Modules/Auth/database/seeders/DatabaseSeeder.php'));
 
         // Config
-        copy(__DIR__.'/../../stubs/module-api/config/auth.php', base_path('config/auth.php'));
+        copy(__DIR__.'/../../stubs/module-blade/config/auth.php', base_path('config/auth.php'));
 
         // Models
-        (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/module-api/app/Models', base_path('Modules/Auth/app/Models'));
+        (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/module-blade/app/Models', base_path('Modules/Auth/app/Models'));
 
         // Cleaning
         (new Filesystem)->delete(base_path('Modules/Auth/resources/views/index.blade.php'));
