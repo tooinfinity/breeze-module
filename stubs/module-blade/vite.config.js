@@ -12,7 +12,10 @@ async function getConfig() {
     return defineConfig({
         plugins: [
             laravel({
-                input: allPaths,
+                input: [
+                    paths,
+                    allPaths
+                ],
                 refresh: true,
             })
         ]

@@ -27,7 +27,6 @@ trait InstallsModuleBladeStack
             ] + $packages;
         });
 
-        $this->updateAuthModelConfig();
 
         // Cleaning...
         $this->removeScaffoldingUnnecessaryForModuleBlade();
@@ -75,6 +74,9 @@ trait InstallsModuleBladeStack
         // seeders
         copy(__DIR__.'/../../stubs/module-api/database/seeders/DatabaseSeeder.php', base_path('Modules/Auth/database/seeders/DatabaseSeeder.php'));
 
+        // Config
+        (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/module-api/config/', config_path());
+
         // Models
         (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/module-api/app/Models', base_path('Modules/Auth/app/Models'));
 
@@ -84,11 +86,6 @@ trait InstallsModuleBladeStack
         // "Dashboard" Route...
         $this->replaceInFile('/home', '/dashboard', resource_path('views/welcome.blade.php'));
         $this->replaceInFile('Home', 'Dashboard', resource_path('views/welcome.blade.php'));
-
-        // remove unnecessary files
-        (new Filesystem)->delete(base_path('vite.config.js'));
-        (new Filesystem)->delete(resource_path('css/app.css'));
-        (new Filesystem)->delete(resource_path('js/app.js'));
 
         // Tailwind / Vite...
         copy(__DIR__.'/../../stubs/module-blade/tailwind.config.js', base_path('tailwind.config.js'));
@@ -126,10 +123,7 @@ trait InstallsModuleBladeStack
         // Remove users seeders
         $files->delete(base_path('database/seeders/DatabaseSeeder.php'));
 
-    }
-    protected function updateAuthModelConfig(): void
-    {
-        // Update the 'model' value for the 'users' provider dynamically
-        Config::set('auth.providers.users.model', env('AUTH_MODEL', Modules\Auth\Models\User::class));
+        // Remove Auth Config
+        $files->delete(config_path('auth.php'));
     }
 }
