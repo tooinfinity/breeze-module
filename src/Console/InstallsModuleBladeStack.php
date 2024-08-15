@@ -75,7 +75,7 @@ trait InstallsModuleBladeStack
         copy(__DIR__.'/../../stubs/module-api/database/seeders/DatabaseSeeder.php', base_path('Modules/Auth/database/seeders/DatabaseSeeder.php'));
 
         // Config
-        (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/module-api/config/', config_path());
+        copy(__DIR__.'/../../stubs/module-api/config/auth.php', base_path('config/auth.php'));
 
         // Models
         (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/module-api/app/Models', base_path('Modules/Auth/app/Models'));
@@ -93,6 +93,8 @@ trait InstallsModuleBladeStack
         copy(__DIR__.'/../../stubs/module-blade/vite.config.js', base_path('vite.config.js'));
         copy(__DIR__.'/../../stubs/module-blade/resources/css/app.css', resource_path('css/app.css'));
         copy(__DIR__.'/../../stubs/module-blade/resources/js/app.js', resource_path('js/app.js'));
+
+        $this->runCommands(['composer dump-autoload']);
 
         $this->components->info('Installing and building Node dependencies.');
 
